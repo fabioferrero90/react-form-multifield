@@ -6,12 +6,12 @@ import { useState , useEffect, useRef } from 'react';
 function App() {
   const [posts, setPosts] = useState(postList);
   const [isPublished, setIsPublished] = useState(false);
-  
+
   useEffect(() => {
     if (isPublished) {
       alert("Il post è stato pubblicato!");
     }
-  }, [posts]);
+  }, [isPublished]);
 
   function addPost(newPost) {
     setPosts([...posts, newPost]);
