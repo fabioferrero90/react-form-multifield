@@ -21,7 +21,11 @@ function App() {
           ...post,
           titolo: updatedPost.title,
           contenuto: updatedPost.content,
-          autore: updatedPost.author
+          autore: updatedPost.author,
+          tags: updatedPost.tags,
+          category: updatedPost.category,
+          status: updatedPost.status,
+          image: updatedPost.image
         };
       }
       return post;
