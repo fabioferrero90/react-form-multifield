@@ -1,10 +1,17 @@
 import NewPost from "./components/NewPost";
 import PostList from "./components/PostList";
 import postList from "./data/posts";
-import { useState } from 'react';
+import { useState , useEffect, useRef } from 'react';
 
 function App() {
   const [posts, setPosts] = useState(postList);
+  const [isPublished, setIsPublished] = useState(false);
+  
+  useEffect(() => {
+    if (isPublished) {
+      alert("Il post è stato pubblicato!");
+    }
+  }, [posts]);
 
   function addPost(newPost) {
     setPosts([...posts, newPost]);
@@ -17,6 +24,9 @@ function App() {
   function updatePost(postId, updatedPost) {
     setPosts(posts.map(post => {
       if (post.id === postId) {
+        if (post.status !== "Pubblicato" && updatedPost.status === "Pubblicato") {
+          setIsPublished(true);
+        }
         return {
           ...post,
           titolo: updatedPost.title,

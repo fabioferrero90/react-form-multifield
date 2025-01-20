@@ -4,6 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Post = ({ id, image, author, date, title, content, status, category, tags, updateFunc, removeFunc }) => {
+  const postData = {
+    id:id,
+    image:image,
+    author:author,
+    date:date,
+    title:title,
+    content:content,
+    status:status,
+    category:category,
+    tags:tags
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editPost, setEditPost] = useState({ author, title, content, image, category, tags, status });
 
@@ -15,6 +26,10 @@ const Post = ({ id, image, author, date, title, content, status, category, tags,
     setIsModalOpen(false);
   };
 
+  const PublishPost = (postData) => {
+    const postToPublish = { ...postData, status: 'Pubblicato'};
+    updateFunc( postData.id, postToPublish);
+  };
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
@@ -48,7 +63,9 @@ const Post = ({ id, image, author, date, title, content, status, category, tags,
           <span><strong>Data:</strong><br/>{date}</span>
         </div>
         <div className="col-7 d-flex flex-column justify-content-around my-2">
-          <p>Stato:<span className={`badge badge-primary w-10 mx-2 ${status === 'Pubblicato' ? 'bg-success' : 'bg-danger'}`}>{status}</span></p>
+          <p>Stato:<span className={`badge badge-primary w-10 mx-2 ${status === 'Pubblicato' ? 'bg-success' : 'bg-danger'}`}>{status}</span> {status !== 'Pubblicato' ? (
+            <a className="publish-now" href="#" onClick={() => PublishPost(postData)}>Pubblica adesso</a>
+            ) : ''}</p>
           <h4 className="my-0">{title}</h4>
           <span className="my-1">{content}</span>
           <div className="tagList">
