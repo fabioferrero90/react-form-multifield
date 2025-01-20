@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NewPost = ({ addFunc }) => {
+const NewPost = ({ addFunc, posts }) => {
   const [postInsert, setPostInsert] = useState({
     autore: '',
     titolo: '',
@@ -28,8 +28,12 @@ const NewPost = ({ addFunc }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addFunc(postInsert);
-    // Reset form
+    const lastId = posts.reduce((last, post) => (post.id > last ? post.id : last), 0);
+    const newPost = {...postInsert,
+        data: new Date().toLocaleDateString(),
+        id: lastId + 1
+    };
+    addFunc(newPost);
     setPostInsert({
       autore: '',
       titolo: '',

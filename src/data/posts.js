@@ -6,7 +6,7 @@ const posts = [
     autore: "Fabio",
     data: "17/01/2025",
     image: "https://knackforge.com/wp-content/uploads/2022/11/Benefits-of-ReactJS.jpg",
-    category: "Generale",
+    category: "JavaScript",
     tags: ["React"],
     status: "Pubblicato",
   },
